@@ -91,7 +91,8 @@ orderRouter.get('/user', [authenticate], orderController.findOrdersByUserId);
  *         description: Return order
  *       404:
  *         description: Order not found
- *     security: []
+ *     security:
+ *       - bearerAuth: []
  */
 orderRouter.get('/:id',authenticate ,orderController.findOrderById);
 

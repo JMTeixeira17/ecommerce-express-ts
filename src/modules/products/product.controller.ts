@@ -52,7 +52,7 @@ export class ProductController{
         try{
             const { id } = req.params;
             await productService.deleteProduct(id);
-            res.status(204).json({ message: 'Product deleted successfully' });
+            res.status(200).json({ message: 'Product deleted successfully' });
         }catch(error: any){
             res.status(error.status).json({ message: error.message });
         }

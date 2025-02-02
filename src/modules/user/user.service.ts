@@ -12,7 +12,12 @@ export class UserService{
         try{
             const user = await userRepository.findUserByEmail(createUser.email);
             if(user){
-                throw createError(409, "User already exists");
+                if(user.email === createUser.email){
+                    throw createError(409, "Email already exists");
+                }
+                if(user.username === createUser.username){
+                    throw createError(409, "Username already exists");
+                }
             }
             createUser.password = await bcrypt.hash(createUser.password, 10);
             const newUser = await userRepository.createUser(createUser);

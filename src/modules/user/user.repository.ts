@@ -7,13 +7,17 @@ export class UserRepository{
             data: user
         });
     }
-    async findUserByEmail(email: string){
-        return await prisma.user.findUnique({
-            where:{
-                email
+    async findUserByEmailOrUsername(email: string, username: string) {
+        return await prisma.user.findFirst({
+            where: {
+                OR: [
+                    { email: email },
+                    { username: username }
+                ]
             }
         });
     }
+
     async findUserByUsername(username: string){
         return await prisma.user.findUnique({
             where:{

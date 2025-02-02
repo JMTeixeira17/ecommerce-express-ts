@@ -10,7 +10,7 @@ export class UserService{
 
     async registerUser(createUser: User){
         try{
-            const user = await userRepository.findUserByEmail(createUser.email);
+            const user = await userRepository.findUserByEmailOrUsername(createUser.email, createUser.username);
             if(user){
                 if(user.email === createUser.email){
                     throw createError(409, "Email already exists");
